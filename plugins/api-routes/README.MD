@@ -4,20 +4,17 @@
 #Routes
 ###Content Types method  :  GET
 #####About
-- All content 
-    
     /wp-json/content/types/about
 #####Prestation
-- All content 
-    
     /wp-json/content/types/prestations
- #####Articles
-- All content 
-    
+    /wp-json/content/types/prestations/id
+ #####Articles    
     /wp-json/content/types/articles
+    /wp-json/content/types/articles/id
+ #####Portfolio    
+    /wp-json/content/types/portfolio
+    /wp-json/content/types/portfolio/id
  #####Faq
-- All content 
-    
     /wp-json/content/types/faq
  
  
