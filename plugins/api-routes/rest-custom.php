@@ -5,7 +5,7 @@ Description: Custom route for API - depend du thème API
 Version: 0.1
 Author: Kevin JANIKY
 */
-
+require_once dirname( __FILE__ ) . '/prestations.php';
 /**
  * Grab articles with custom field acf
  *
@@ -48,13 +48,13 @@ function get_about_type($data)
     return $items;
 }
 
-
+/*
 function get_prestation_types($data)
 {
-
     $posts = get_posts(array(
         'post_type' => 'prestations',
     ));
+
     if (empty($posts)) return null;
     $items = array();
     $count = count($posts);
@@ -75,7 +75,7 @@ function get_prestation_types($data)
         }
     }
     return $items;
-}
+}*/
 
 function get_articles_types($data)
 {
@@ -144,36 +144,33 @@ function get_portfolio_types($data)
     return $items;
 }
 
-
-add_action('rest_api_init', function () {
-    register_rest_route('content/types', '/about/', array(
+function add_routes_to_api()
+{
+    register_rest_route('types/content', '/about/', array(
         'methods' => 'GET',
         'callback' => 'get_about_type',
     ));
-}, 30);
-
-add_action('rest_api_init', function () {
-    register_rest_route('content/types', '/prestations/', array(
+   /* register_rest_route('types/content', '/prestations/', array(
         'methods' => 'GET',
         'callback' => 'get_prestation_types',
     ));
-}, 30);
-
-add_action('rest_api_init', function () {
-    register_rest_route('content/types', '/articles/', array(
+    register_rest_route('types/content', '/prestations/(?P<id>\d+)', array(
+        'methods' => 'GET',
+        'callback' => 'get_prestation_types',
+    ));*/
+    register_rest_route('types/content', '/articles/', array(
         'methods' => 'GET',
         'callback' => 'get_articles_types',
     ));
-}, 30);
-add_action('rest_api_init', function () {
-    register_rest_route('content/types', '/faq/', array(
+    register_rest_route('types/content', '/faq/', array(
         'methods' => 'GET',
         'callback' => 'get_faq_types',
     ));
-}, 30);
-add_action('rest_api_init', function () {
-    register_rest_route('content/types', '/portfolio/', array(
+    register_rest_route('types/content', '/portfolio/', array(
         'methods' => 'GET',
         'callback' => 'get_portfolio_types',
     ));
-}, 30);
+}
+
+
+add_action('rest_api_init', 'add_routes_to_api', 30);
