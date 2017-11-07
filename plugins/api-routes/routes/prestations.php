@@ -1,11 +1,4 @@
 <?php
-/*qq
-Plugin Name: API Routes
-Description: Custom route for API - depend du thème API
-Version: 0.1
-Author: Kevin JANIKY
-*/
-
 
 
 function get_prestation_types($data)
@@ -43,20 +36,20 @@ function get_prestation_types_by_id($data)
 
     if (empty($posts)) return null;
     $items = array();
-        $id = $posts->ID;
-        $fields = get_field_objects($id);
-        if ($posts->post_status == 'publish') {
-            if (empty($fields)) return null;
-            $items['id'] = $posts->ID;
-            $items['title'] = $posts->post_title;
-            $items['uri'] = $posts->post_name;
-            $items['description'] = $posts->post_content;
-            $items['price'] = $fields['prestation_price']['value'];
-            $items['link'] = $fields['prestation_lien']['value'];
-            $taxo = get_the_terms($id, 'prestation-taxo-item');
-            $items['taxo'] = $taxo[0]->name;
-            $items['img'] = get_the_post_thumbnail_url($id, 'full');
-        }
+    $id = $posts->ID;
+    $fields = get_field_objects($id);
+    if ($posts->post_status == 'publish') {
+        if (empty($fields)) return null;
+        $items['id'] = $posts->ID;
+        $items['title'] = $posts->post_title;
+        $items['uri'] = $posts->post_name;
+        $items['description'] = $posts->post_content;
+        $items['price'] = $fields['prestation_price']['value'];
+        $items['link'] = $fields['prestation_lien']['value'];
+        $taxo = get_the_terms($id, 'prestation-taxo-item');
+        $items['taxo'] = $taxo[0]->name;
+        $items['img'] = get_the_post_thumbnail_url($id, 'full');
+    }
 
     return $items;
 }
