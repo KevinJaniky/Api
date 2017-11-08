@@ -34,3 +34,13 @@ function get_about_type($data)
     }
     return $items;
 }
+
+function add_routes_about_to_api()
+{
+    register_rest_route('types/content', '/about/', array(
+        'methods' => 'GET',
+        'callback' => 'get_about_type',
+    ));
+}
+
+add_action('rest_api_init', 'add_routes_about_to_api', 30);
